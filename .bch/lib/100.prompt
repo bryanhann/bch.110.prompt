@@ -59,6 +59,7 @@ $(fix_w \w)\
 :prompt.current () {
     ${BH_BH_PROMPT:=:p.m}
 }
+
 :p.m () {
     export BH_BH_PROMPT=:p.m
     :prompt:main
@@ -73,6 +74,20 @@ $(fix_w \w)\
     export BH_BH_PROMPT=:p.l
     PS1='[#\#] [\u@\h \w$(__git_ps1 " (%s)")]\$ '
 }
+
+:p.q () {
+    : use quick prompt.
+    :
+    : Make the prompt respond rapidly to aid in zjots.
+    : Inter alia, do not call function [__git_ps1].
+    : --------------------------------------------------------
+    : We export the name of this function to BH_BH_PROMPT 
+    : so that subshells will know what our current prompt is.
+    : --------------------------------------------------------
+    export BH_BH_PROMPT=:p.q
+    PS1='[\u@\h \W]\$ '
+}
+
 
 GIT_PS1_SHOWDIRTYSTATE=1
 GIT_PS1_SHOWSTASHSTATE=1
